@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To the Love of My Life</title>
+    <!-- CSS link -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for handwriting and an elegant sans-serif for UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background floating hearts container -->
+    <div id="hearts-background"></div>
+
+    <!-- SECTION 1: Envelope Opening Animation -->
+    <div id="envelope-wrapper">
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="body"></div>
+            <div class="front"></div>
+            <div class="seal">Click to Open</div>
+        </div>
+    </div>
+
+    <!-- SECTION 2, 3, 4: The Love Letter (Initially Hidden) -->
+    <div id="letter-wrapper" class="hidden">
+        <div class="paper">
+            <!-- Section 2: Love Letter Message -->
+            <section class="romantic-message">
+                <h1 class="title">To Ponna from Harii 😸</h1>
+                <p id="typing-text" class="handwriting"></p>
+            </section>
+
+            <!-- Section 3: Our 8 Beautiful Moments -->
+            <section class="memories-section hidden" id="memories">
+                <h2 class="subtitle">My 8 fav Momentss</h2>
+                
+                <div class="card-viewer">
+                    <!-- 8 memory cards structured as polaroids -->
+                    <div class="polaroid active" data-index="0">
+                        <div class="photo">
+                            <img src="images/my_fav_pic_img1.jpg" alt="The day we first met">
+                        </div>
+                        <p class="caption">My favorite pic</p>
+                    </div>
+                    <div class="polaroid" data-index="1">
+                        <div class="photo">
+                            <img src="images/out_first_date_img2.jpg" alt="Our favorite selfie">
+                        </div>
+                        <p class="caption">Our first date</p>
+                    </div>
+                    <div class="polaroid" data-index="2">
+                        <div class="photo">
+                            <img src="images/fell_in_love_pic._img3.jpg" alt="The moment I realized I love you">
+                        </div>
+                        <p class="caption">The moment i fell of soo much</p>
+                    </div>
+                    <div class="polaroid" data-index="3">
+                        <div class="photo">
+                            <img src="images/my_fav_dayimg4.jpg" alt="That day we couldn't stop laughing">
+                        </div>
+                        <p class="caption">My favv day</p>
+                    </div>
+                    <div class="polaroid" data-index="4">
+                        <div class="photo">
+                            <img src="images/my fav_moment_img5.jpg" alt="Our favorite memory together">
+                        </div>
+                        <p class="caption">My favourite moment was this and metro</p>
+                    </div>
+                    <div class="polaroid" data-index="5">
+                        <div class="photo">
+                            <img src="images/fav_ashtetic_pic_img6.jpg" alt="The moment you made my day">
+                        </div>
+                        <p class="caption">My favvv photo ashtetically</p>
+                    </div>
+                    <div class="polaroid" data-index="6">
+                        <div class="photo">
+                            <img src="images/handssss_img7.jpg" alt="My favorite picture of you">
+                        </div>
+                        <p class="caption">Handssss 😭😭😭</p>
+                    </div>
+                    <div class="polaroid" data-index="7">
+                        <div class="photo">
+                            <img src="images/idk_i_just feel_this_pick looks good_img8.jpg" alt="One of my happiest memories">
+                        </div>
+                        <p class="caption">US IN 19 yrs old</p>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="prev-btn" class="btn">Previous</button>
+                    <span id="card-indicator">Moment 1 of 8</span>
+                    <button id="next-btn" class="btn">Next</button>
+                </div>
+            </section>
+
+            <!-- Section 4: Final Romantic Question -->
+            <section class="proposal-section hidden" id="proposal">
+                <p class="lead-text handwriting">I know its one day late sorry.<br>I started it yesterday but got over today</p>
+                <h2 class="big-question">Will you marry me when we turn 28?</h2>
+                <div class="proposal-buttons">
+                    <button class="btn btn-yes">YES ❤️</button>
+                    <button class="btn btn-ofcourse">No other choice for you monkeyy</button>
+                </div>
+                <!-- Final hidden text to display after clicking -->
+                <p id="proposal-response" class="hidden handwriting">Happy 8th month aniversaryy ponnaa . I love you soo muchh</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Main JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

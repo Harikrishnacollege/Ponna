@@ -1,0 +1,327 @@
+/* RESET & BASE VARIABLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-cream: #ffffff; /* Brighter cream/white */
+    --blush-pink: #ffd6d6; /* Stronger flush of pink */
+    --envelope-dark: #e8d0d0;
+    --envelope-light: #fce8e8;
+    --envelope-flap: #eecaca;
+    --text-dark: #4a3f35;
+    --text-light: #7a6e61;
+    --accent-red: #d35d6e;
+    --paper-color: #fffdf9;
+}
+
+body {
+    /* Soft pastel background */
+    background: linear-gradient(135deg, var(--bg-cream), var(--blush-pink));
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* ----------------------
+   FLOATING HEARTS 
+---------------------- */
+#hearts-background {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* Allows clicking through */
+    z-index: 0;
+}
+.floating-heart {
+    position: absolute;
+    color: rgba(255, 60, 90, 0.7); /* Brighter, more vivid red */
+    animation: floatUp linear forwards;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) scale(1.2) rotate(45deg); opacity: 0; }
+}
+
+/* ----------------------
+   SECTION 1: ENVELOPE
+---------------------- */
+#envelope-wrapper {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+#envelope-wrapper:hover {
+    transform: translateY(-5px); /* Soft hover effect */
+}
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: var(--envelope-dark);
+    border-radius: 5px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+/* creating the triangle shapes with borders */
+.envelope .front {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid var(--envelope-light);
+    border-right: 150px solid var(--envelope-light);
+    border-bottom: 100px solid #f6dada;
+    border-top: 100px solid transparent;
+    z-index: 3;
+}
+.envelope .flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid var(--envelope-flap);
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 0.8s ease-in-out;
+}
+.envelope .seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent-red);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(211, 93, 110, 0.4);
+    transition: opacity 0.5s ease;
+}
+
+/* Envelope open animation logic */
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1; /* Drop flap behind when open */
+}
+.envelope.open .seal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ----------------------
+   SECTIONS 2-4: LETTER
+---------------------- */
+#letter-wrapper {
+    position: relative;
+    z-index: 20;
+    max-width: 800px;
+    width: 95%;
+    margin: 40px auto;
+    perspective: 1000px;
+}
+.paper {
+    background: var(--paper-color);
+    /* Subtle paper noise texture via SVG data uri */
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23n)" opacity="0.04"/></svg>');
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08); /* Soft shadows */
+    transform-origin: top;
+    animation: unfold 1.2s ease-out forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+@keyframes unfold {
+    0% { transform: scaleY(0) translateY(50px); opacity: 0; }
+    100% { transform: scaleY(1) translateY(0); opacity: 1; }
+}
+.hidden {
+    display: none !important;
+}
+
+/* TYPOGRAPHY */
+.handwriting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+h1.title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: var(--accent-red);
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+h2.subtitle, h2.big-question {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    color: var(--accent-red);
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+#typing-text {
+    min-height: 120px; /* Reserves space while typing */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ----------------------
+   SECTION 3: MEMORY CARDS 
+---------------------- */
+.memories-section {
+    margin-top: 50px;
+    width: 100%;
+    animation: fadeIn 1s ease forwards;
+}
+.card-viewer {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 400px;
+    margin: 0 auto 20px auto;
+}
+
+/* Polaroid Card Style */
+.polaroid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: white;
+    padding: 15px 15px 25px 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    opacity: 0;
+    transform: translateX(40px) rotate(2deg); /* Initial state waiting on right */
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+    pointer-events: none;
+}
+.polaroid:hover {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* Hover shadow */
+}
+
+/* Active card state */
+.polaroid.active {
+    opacity: 1;
+    transform: translateX(0) rotate(-2deg); /* Slight tilt for realism */
+    pointer-events: auto;
+    z-index: 2;
+}
+
+/* Exiting card state (sliding left) */
+.polaroid.exit {
+    opacity: 0;
+    transform: translateX(-40px) rotate(-6deg);
+    z-index: 1;
+}
+
+.polaroid .photo {
+    width: 100%;
+    aspect-ratio: 1; /* Keeps image square */
+    background: #f0f0f0;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.polaroid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.polaroid .caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+.btn {
+    background: var(--bg-cream);
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    background: var(--accent-red);
+    color: white;
+    box-shadow: 0 4px 12px rgba(211, 93, 110, 0.3); /* Glowing hover effect */
+}
+#card-indicator {
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
+/* ----------------------
+   SECTION 4: PROPOSAL
+---------------------- */
+.proposal-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px dashed #e4d5d5;
+    animation: fadeIn 1s ease forwards;
+}
+.proposal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+.btn-yes, .btn-ofcourse {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    background: #fff;
+    border: 2px solid var(--accent-red);
+    border-radius: 30px;
+}
+#proposal-response {
+    margin-top: 35px;
+    font-size: 1.8rem;
+    color: var(--accent-red);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------
+   RESPONSIVE DESIGN 
+---------------------- */
+@media (max-width: 600px) {
+    .paper { padding: 30px 20px; }
+    h1.title { font-size: 2.8rem; }
+    h2.subtitle, h2.big-question { font-size: 2.2rem; }
+    .handwriting { font-size: 1.4rem; }
+    
+    .card-viewer { max-width: 260px; height: 330px; }
+    .polaroid { padding: 10px 10px 20px 10px; }
+    .polaroid .caption { font-size: 1.3rem; }
+    
+    .proposal-buttons { flex-direction: column; gap: 15px; }
+    .btn-yes, .btn-ofcourse { font-size: 1.1rem; }
+}
